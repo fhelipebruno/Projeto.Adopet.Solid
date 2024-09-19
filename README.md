@@ -1,0 +1,1 @@
+# Projeto.Adopet.Solid-master
