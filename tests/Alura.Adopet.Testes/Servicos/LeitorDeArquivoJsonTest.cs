@@ -9,28 +9,29 @@ public class LeitorDeArquivoJsonTest : IDisposable
     public LeitorDeArquivoJsonTest()
     {
         //Setup
-        string linha = @"[
-                          {
-                            ""Id"": ""68286fbf-f6f4-4924-adab-0637511813e0"",
-                            ""Nome"":""Mancha"",
-                            ""Tipo"": 1
-                          },
-                          {
-                            ""Id"": ""68286fbf-f6f4-4924-adab-0637511672e0"",
-                            ""Nome"": ""Alvo"",
-                            ""Tipo"": 1
-                          },
-                          {
-                            ""Id"": ""68286fbf-f6f4-1234-adab-0637511672e0"",
-                            ""Nome"": ""Pinta"",
-                            ""Tipo"": 1
-                          }
-                        ]
-                        ";
+        string conteudo = @"
+            [
+              {
+                ""Id"": ""68286fbf-f6f4-4924-adab-0637511813e0"",
+                ""Nome"": ""Mancha"",
+                ""Tipo"": 1
+              },
+              {
+                ""Id"": ""68286fbf-f6f4-4924-adab-0637511672e0"",
+                ""Nome"": ""Alvo"",
+                ""Tipo"": 1
+              },
+              {
+                ""Id"": ""68286fbf-f6f4-1234-adab-0637511672e0"",
+                ""Nome"": ""Pinta"",
+                ""Tipo"": 1
+              }
+            ]
+        ";
 
         string nomeRandomico = $"{Guid.NewGuid()}.json";
 
-        File.WriteAllText(nomeRandomico, linha);
+        File.WriteAllText(nomeRandomico, conteudo);
         caminhoArquivo = Path.GetFullPath(nomeRandomico);
     }
 
@@ -39,7 +40,7 @@ public class LeitorDeArquivoJsonTest : IDisposable
     {
         //Arrange            
         //Act
-        var listaDePets = new LeitorDeArquivoJson(caminhoArquivo).RealizaLeitura()!;
+        var listaDePets = new LeitorDeArquivosJson(caminhoArquivo).RealizaLeitura()!;
         //Assert
         Assert.NotNull(listaDePets);
         Assert.IsType<List<Pet>?>(listaDePets);

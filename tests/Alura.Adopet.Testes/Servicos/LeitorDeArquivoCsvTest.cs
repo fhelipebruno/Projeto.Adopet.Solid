@@ -36,7 +36,7 @@ public class LeitorDeArquivoCsvTest : IDisposable
         //Act
         var listaDePets = new LeitorDeArquivoCsv("").RealizaLeitura();
         //Assert
-        Assert.Null(listaDePets); 
+        Assert.Null(listaDePets);
     }
 
     [Fact]
