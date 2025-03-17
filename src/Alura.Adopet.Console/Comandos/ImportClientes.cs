@@ -1,9 +1,13 @@
-﻿using Alura.Adopet.Console.Modelos;
+﻿using Alura.Adopet.Console.Atributos;
+using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Results;
 using Alura.Adopet.Console.Servicos.Abstracoes;
 using FluentResults;
 
 namespace Alura.Adopet.Console.Comandos;
+
+[DocComandoAttribute(instrucao: "import-clientes",
+        documentacao: "adopet import-clientes <ARQUIVO> comando que realiza a importação do arquivo de clientes.")]
 
 public class ImportClientes : IComando
 {
@@ -21,8 +25,10 @@ public class ImportClientes : IComando
         try
         {
             var lista = leitorDeArquivo.RealizaLeitura();
+            
             foreach (var cliente in lista)
             {
+                System.Console.WriteLine("Enviando cliente: " + cliente);
                 await apiService.CreateAsync(cliente);
             }
             return Result.Ok().WithSuccess(new SuccessWithClientes(lista, "Importação Realizada com Sucesso!"));
