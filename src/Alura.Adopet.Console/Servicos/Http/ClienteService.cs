@@ -2,25 +2,23 @@
 using Alura.Adopet.Console.Servicos.Abstracoes;
 using System.Net.Http.Json;
 
-namespace Alura.Adopet.Console.Servicos.Http
+namespace Alura.Adopet.Console.Servicos.Http;
+public class ClienteService : IApiService<Cliente>
 {
-    public class ClienteService : IApiService<Cliente>
+    private HttpClient client;
+
+    public ClienteService(HttpClient client)
     {
-        private HttpClient client;
+        this.client = client;
+    }
+    public Task CreateAsync(Cliente cliente)
+    {
+        return client.PostAsJsonAsync("cliente/add", cliente);
+    }
 
-        public ClienteService(HttpClient httpClient)
-        {
-            client = httpClient;
-        }
-        public Task CreateAsync(Cliente cliente)
-        {
-            return client.PostAsJsonAsync("cliente/add", cliente);
-        }
-
-        public async Task<IEnumerable<Cliente>?> ListAsync()
-        {
-            HttpResponseMessage response = await client.GetAsync("cliente/list");
-            return await response.Content.ReadFromJsonAsync<IEnumerable<Cliente>>();
-        }
+    public async Task<IEnumerable<Cliente>?> ListAsync()
+    {
+        HttpResponseMessage response = await client.GetAsync("cliente/list");
+        return await response.Content.ReadFromJsonAsync<IEnumerable<Cliente>>();
     }
 }

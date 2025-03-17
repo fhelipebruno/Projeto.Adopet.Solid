@@ -1,11 +1,10 @@
 ﻿using Alura.Adopet.Console.Modelos;
 
-namespace Alura.Adopet.Console.Servicos.Arquivos
+namespace Alura.Adopet.Console.Servicos.Arquivos;
+public class ClientesDoJson : LeitorDeArquivosJson<Cliente>
 {
-    public class ClientesDoJson : LeitorDeArquivosJson<Cliente>
+    public ClientesDoJson(string caminhoDoArquivoASerLido) : base(caminhoDoArquivoASerLido)
     {
-        public ClientesDoJson(string caminhoArquivo) : base(caminhoArquivo)
-        {
-        }
     }
-}
+
+ }
